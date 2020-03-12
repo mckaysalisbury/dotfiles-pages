@@ -6,8 +6,12 @@
   <script src="full.render.js"></script>
 </head>
 <script>
+  // it feels like there's got to be a better way, but a one liner is easier than finding and importing a new script
+  // Also, I don't want to decodeURIComponent, because I'm just going to reencode it to pass it to the request
+  // Am I missing a security vulnerability as a result?
+  const params = Object.fromEntries(window.location.search.substr(1).split('&').map((param) => param.split('=')));
   const request = new XMLHttpRequest();
-  request.open("GET", "sample.gv");
+  request.open("GET", params.src);
   request.send();
   request.onreadystatechange = e => {
     if (request.readyState === XMLHttpRequest.DONE) {
