@@ -1,0 +1,40 @@
+<html>
+
+<head>
+  <title>Graphviz - Render</title>
+  <script src="viz.js"></script>
+  <script src="full.render.js"></script>
+</head>
+<script>
+  const request = new XMLHttpRequest();
+  request.open("GET", "sample.gv");
+  request.send();
+  request.onreadystatechange = e => {
+    if (request.readyState === XMLHttpRequest.DONE) {
+      var status = request.status;
+      // In local files, status is 0 upon success in Mozilla Firefox
+      if (status === 0 || (200 >= status && status < 400)) {
+        const graph = request.responseText;
+        var viz = new Viz();
+        viz
+          .renderSVGElement(graph)
+          .then(function (element) {
+            document.body.appendChild(element);
+          })
+          .catch(error => {
+            // Create a new Viz instance (@see Caveats page for more info)
+            viz = new Viz();
+
+            // Possibly display the error
+            console.error(error);
+          });
+      } else {
+        alert(
+          `There was a problem with the request:${request.status}, ${request.readyState}, ${request.responseText}`
+        );
+      }
+    }
+  };
+</script>
+
+</html>
