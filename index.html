@@ -2,10 +2,19 @@
 
 <head>
   <title>Graphviz</title>
+  <script src='https://github.mckaysalisbury.com/ListBoy/ListBoy.js'></script>
+  <script>
+
+    // Put the files you want to advertize here
+    files = ['sample'];
+
+    files = files.map((file) => `<a href="render.html?src=${file}.gv">${file}</a>`);
+    console.log(files)
+    ListBoy.RenderTo(files, 'main');
+  </script>
 </head>
 
-<body>
-  <a href="render.html?src=sample.gv">Sample</a>
+<body id='main'>
 </body>
 
 </html>
