@@ -1,0 +1,10 @@
+graph network { 
+    isp -- modem [label=fiber]
+    modem -- meshRouter -- computer1 [label=ethernet]
+    {
+        rank=same
+        meshRouter -- meshSatellite1 -- meshSatellite2 -- meshRouter [label=wifi6]
+    }
+    meshSatellite1 -- computer2 [label=ethernet]
+    meshRouter, meshSatellite1, meshSatellite2 -- phones, tablets [label=wifi1to6]
+}

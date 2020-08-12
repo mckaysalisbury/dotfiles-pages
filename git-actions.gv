@@ -1,0 +1,18 @@
+digraph git {
+  rankdir=LR
+  label="git actions\nArrows represent data flow"
+  subgraph clusterComputer {
+    color=red
+    fontcolor=red
+    label="Your computer"
+    workspace [shape=folder]
+    index [shape=cylinder]
+    repository [shape=cylinder]
+  }
+  remotes [shape=cylinder]
+  workspace -> index [label="add"]
+  index -> repository [label="commit"]
+  repository -> workspace [label="clone / pull / checkout"]
+  repository -> remotes [label="push"]
+  remotes -> repository [label="clone / pull / fetch"]
+}
